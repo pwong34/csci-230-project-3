@@ -91,6 +91,30 @@ public:
 	void del(int i, int j)
 	{
 		Elem* e = find(i, j);
+		if (e == NULL) { return; }
+		if (e->up == NULL && e->down == NULL)
+		{
+			Header* head;
+			column->moveToStart();
+			for (int i = 0; i < column->length(); i++)
+			{
+				if (column->getValue().index() == j)
+				{
+					head = &column->getValue();
+					break;
+				}
+			}
+			delete[] head;
+			delete[] e;
+		}
+		else if (e->up == NULL)
+		{
+
+		}
+		else if (e->down == NULL)
+		{
+
+		}
 		return;
 	}
 
