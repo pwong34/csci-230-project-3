@@ -9,8 +9,8 @@ private:
 public:
 	Elem* up;
 	Elem* down;
-	Elem* left;
 	Elem* right;
+	Elem* left;
 
 	Elem(int a, int b, int c)
 	{
@@ -19,8 +19,8 @@ public:
 		dat = c;
 		up = NULL;
 		down = NULL;
-		left = NULL;
 		right = NULL;
+		left = NULL;
 	}
 	~Elem(){}
 	int data(){return dat;}
@@ -66,27 +66,27 @@ public:
 			{
 				if (temp == NULL || elem->column() < temp->column())
 				{
-					elem->left = temp;
+					elem->right = temp;
 					if (elem->column() < this->column())
 					{
-						temp->right = elem;
+						temp->left = elem;
 						return elem;
 					}
 					if (temp != NULL)
 					{
-						elem->right = temp->right;
-						temp2->left = elem;
-						temp->right = elem;
+						elem->left = temp->left;
+						temp2->right = elem;
+						temp->left = elem;
 					}
 					else
 					{
-						elem->right = temp2;
-						temp2->left = elem;
+						elem->left = temp2;
+						temp2->right = elem;
 					}
 					return this;
 				}
 				temp2 = temp;
-				temp = temp->left;
+				temp = temp->right;
 			}
 
 		}

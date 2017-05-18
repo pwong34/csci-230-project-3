@@ -30,27 +30,31 @@ public:
 			{
 				 Header head('c', n->column(), n);
 				column->insert(head);
+				column->moveToStart();
 				break;
 			}
 			else if (column->getValue().index() == n->column())
 			{
 				column->getValue().add(n);
+				column->moveToStart();
 				break;
 			}
 			column->next();
 		}
 
-		for (int i = 0; i < n->row(); i++)
+		for (int j = 0; j < n->row(); j++)
 		{
 			if (row->length() == 0 || row->getValue().index() < n->row())
 			{
 				Header head('r', n->row(), n);
 				row->insert(head);
+				row->moveToStart();
 				break;
 			}
 			else if (row->getValue().index() == n->row())
 			{
 				row->getValue().add(n);
+				row->moveToStart();
 				break;
 			}
 			row->next();

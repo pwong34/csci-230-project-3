@@ -22,6 +22,10 @@ int main()
 	a->insert(2, 2, 5);
 	a->insert(10, 2, 3);
 	a->insert(4, 2, 4);
+	a->insert(4, 3, 4);
+	a->insert(10, 10, 10);
+	a->insert(9, 9, 9);
+	a->insert(9, 8, 7);
 	a->print();
 
 	/*LList<Header> z;
