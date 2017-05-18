@@ -16,17 +16,16 @@ public:
 	void insert(int i, int j, int val)
 	{
 		Elem* e = new Elem(i,j,val);
-		inserthelp(e);
-		
+		inserthelp(e);	
 	}
 	LList<Header>* c() { return column; }
 	LList<Header>* r() { return row; }
 	void inserthelp(Elem* n)
 	{
 		
-		for( int i = 0; i < n->column(); i++)
+		for( int i = 0; i <=column->length(); i++)
 		{
-			if (column->length() == 0 || column->getValue().index() < n->column())
+			if (column->length() == 0 || i == column->length()|| column->getValue().index() > n->column())
 			{
 				 Header head('c', n->column(), n);
 				column->insert(head);
@@ -42,9 +41,9 @@ public:
 			column->next();
 		}
 
-		for (int j = 0; j < n->row(); j++)
+		for (int j = 0; j <=row->length(); j++)
 		{
-			if (row->length() == 0 || row->getValue().index() < n->row())
+			if (row->length() == 0 || j == column->length() || row->getValue().index() > n->row())
 			{
 				Header head('r', n->row(), n);
 				row->insert(head);

@@ -17,7 +17,6 @@ int main()
 	d->add(c);
 	d->print();*/
 	
-
 	matrix* a = new matrix();
 	a->insert(2, 2, 5);
 	a->insert(10, 2, 3);
@@ -26,6 +25,7 @@ int main()
 	a->insert(10, 10, 10);
 	a->insert(9, 9, 9);
 	a->insert(9, 8, 7);
+	a->insert(10, 9, 6);
 	a->print();
 
 	/*LList<Header> z;
