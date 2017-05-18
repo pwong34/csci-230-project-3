@@ -18,6 +18,33 @@ public:
 		Elem* e = new Elem(i,j,val);
 		inserthelp(e);	
 	}
+	Elem* find(int x, int y)
+	{
+		Header* col = NULL;
+		column->moveToStart();
+		for (int i = 0; i < column->length(); i++)
+		{
+			if (column->getValue().index() == y)
+			{
+				col = &column->getValue();
+				break;
+			}
+			column->next();
+		}
+		column->moveToStart();
+		if (col == NULL) { return NULL; }
+		Elem* node = col->header();
+		for (int j = 0; j < row->length(); j++)
+		{
+			if (node->row() == x)
+			{
+				node->print();
+				return node;
+			}
+			node = node->down;
+		}
+		return NULL;
+	}
 	LList<Header>* c() { return column; }
 	LList<Header>* r() { return row; }
 	void inserthelp(Elem* n)
@@ -58,6 +85,12 @@ public:
 			}
 			row->next();
 		}
+		return;
+	}
+
+	void del(int i, int j)
+	{
+		Elem* e = find(i, j);
 		return;
 	}
 

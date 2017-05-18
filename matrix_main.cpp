@@ -26,6 +26,11 @@ int main()
 	a->insert(9, 9, 9);
 	a->insert(9, 8, 7);
 	a->insert(10, 9, 6);
+	a->find(2, 2);
+	a->find(4, 2);
+	a->find(10, 2);
+	a->find(4, 4);
+	std::cout << "test" << std::endl;
 	a->print();
 
 	/*LList<Header> z;
