@@ -18,11 +18,11 @@ int main()
 	d->print();*/
 	
 
-	matrix* a = new matrix;
+	matrix* a = new matrix();
 	a->insert(2, 2, 5);
-	a->insert(10, 3, 3);
-	a->insert(4, 4, 4);
-	//a.print();*/
+	a->insert(10, 2, 3);
+	a->insert(4, 2, 4);
+	a->print();
 
 	/*LList<Header> z;
 	z.insert(f);

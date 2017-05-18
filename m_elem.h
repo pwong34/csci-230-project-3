@@ -27,9 +27,8 @@ public:
 	int row(){return i;}
 	int column(){return j;}
 
-	Elem* add(char c, Elem& e) 
+	Elem* add(char c, Elem* elem) 
 	{
-		Elem* elem = &e;
 		Elem* temp = this;
 		Elem* temp2 = this;
 		if(c=='c')
@@ -39,7 +38,7 @@ public:
 				if (temp == NULL || elem->row() < temp->row())
 				{
 					elem->down = temp;
-					if (e.row() < this->row())
+					if (elem->row() < this->row())
 					{
 						temp->up = elem;
 						return elem;
@@ -63,6 +62,32 @@ public:
 		}
 		else
 		{
+			while (true)
+			{
+				if (temp == NULL || elem->column() < temp->column())
+				{
+					elem->left = temp;
+					if (elem->column() < this->column())
+					{
+						temp->right = elem;
+						return elem;
+					}
+					if (temp != NULL)
+					{
+						elem->right = temp->right;
+						temp2->left = elem;
+						temp->right = elem;
+					}
+					else
+					{
+						elem->right = temp2;
+						temp2->left = elem;
+					}
+					return this;
+				}
+				temp2 = temp;
+				temp = temp->left;
+			}
 
 		}
 	}

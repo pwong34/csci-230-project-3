@@ -16,35 +16,44 @@ public:
 	void insert(int i, int j, int val)
 	{
 		Elem* e = new Elem(i,j,val);
-		Elem elem = *e;
-		inserthelp(elem);
+		inserthelp(e);
 		
 	}
 	LList<Header>* c() { return column; }
 	LList<Header>* r() { return row; }
-	void inserthelp(Elem &n)
+	void inserthelp(Elem* n)
 	{
-		Elem* temp = &n;
-		for( int i = 0; i < n.column(); i++)
+		
+		for( int i = 0; i < n->column(); i++)
 		{
-			if (column->length() == 0 || column->getValue().index() < n.column())
+			if (column->length() == 0 || column->getValue().index() < n->column())
 			{
-				 Header head('c', n.column(), temp);
-				head.print();
+				 Header head('c', n->column(), n);
 				column->insert(head);
-				std::cout << " New Header" << std::endl;
-				column->print();
 				break;
 			}
-			else if (column->getValue().index() == n.column())
+			else if (column->getValue().index() == n->column())
 			{
-				std::cout << "Same Header" << std::endl;
 				column->getValue().add(n);
-				column->print();
 				break;
 			}
 			column->next();
-			std::cout << " Column next" << std::endl;
+		}
+
+		for (int i = 0; i < n->row(); i++)
+		{
+			if (row->length() == 0 || row->getValue().index() < n->row())
+			{
+				Header head('r', n->row(), n);
+				row->insert(head);
+				break;
+			}
+			else if (row->getValue().index() == n->row())
+			{
+				row->getValue().add(n);
+				break;
+			}
+			row->next();
 		}
 		return;
 	}
@@ -53,5 +62,6 @@ public:
 	{
 		column->print();
 		std::cout << std::endl;
+		row->print();
 	}
 };

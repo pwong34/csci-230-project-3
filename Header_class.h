@@ -20,7 +20,14 @@ public:
 		while (temp != NULL)
 		{
 			temp->print();
-			temp = temp->down;
+			if (c == 'c')
+			{
+				temp = temp->down;
+			}
+			else
+			{
+				temp = temp->right;
+			}
 			/*if (temp == temp->down)
 			{
 				break;
@@ -28,7 +35,7 @@ public:
 		}
 		std::cout << std::endl;
 	}
-	void add(Elem& e)
+	void add(Elem* e)
 	{
 		head = head->add(c, e);
 		//head->print();
