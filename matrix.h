@@ -16,7 +16,8 @@ public:
 	void insert(int i, int j, int val)
 	{
 		Elem* e = new Elem(i, j, val);
-		inserthelp(e);
+		inserthelp('c',column,j,e);
+		inserthelp('r', row, i, e);
 	}
 	Elem* find(int x, int y)
 	{
@@ -47,44 +48,27 @@ public:
 	}
 	LList<Header>* c() { return column; }
 	LList<Header>* r() { return row; }
-	void inserthelp(Elem* n)
+	void inserthelp(char c,  LList<Header>* headers, int elemIndex, Elem* n)
 	{
 
-		for (int i = 0; i <= column->length(); i++)
+		for (int i = 0; i <= headers->length(); i++)
 		{
-			if (column->length() == 0 || i == column->length() || index(column) > n->column())
+			if (headers->length() == 0 || i == headers->length() || index(headers) > elemIndex)
 			{
-				Header head('c', n->column(), n);
-				column->insert(head);
-				column->moveToStart();
+				Header head(c, elemIndex, n);
+				headers->insert(head);
+				headers->moveToStart();
 				break;
 			}
-			else if (index(column) == n->column())
+			else if (index(headers) == elemIndex)
 			{
-				column->getValue().add(n);
-				column->moveToStart();
+				headers->getValue().add(n);
+				headers->moveToStart();
 				break;
 			}
-			column->next();
+			headers->next();
 		}
 
-		for (int j = 0; j <= row->length(); j++)
-		{
-			if (row->length() == 0 || j == column->length() || index(row) > n->row())
-			{
-				Header head('r', n->row(), n);
-				row->insert(head);
-				row->moveToStart();
-				break;
-			}
-			else if (index(row) == n->row())
-			{
-				row->getValue().add(n);
-				row->moveToStart();
-				break;
-			}
-			row->next();
-		}
 		return;
 	}
 

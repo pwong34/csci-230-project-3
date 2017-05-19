@@ -32,17 +32,12 @@ public:
 			{
 				temp = temp->right;
 			}
-			/*if (temp == temp->down)
-			{
-				break;
-			}*/
 		}
 		std::cout << std::endl;
 	}
 	void add(Elem* e)
 	{
 		head = head->add(c, e);
-		//head->print();
 	}
 	void transpose()
 	{
