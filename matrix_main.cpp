@@ -17,7 +17,7 @@ int main()
 	d->add(c);
 	d->print();*/
 
-	matrix* a = new matrix();
+	/*matrix* a = new matrix();
 	a->insert(2, 2, 5);
 	a->insert(10, 2, 3);
 	a->insert(4, 2, 4);
@@ -36,8 +36,14 @@ int main()
 	a->del(4, 3);
 	a->del(7, 7);
 	std::cout << "test----------------------" << std::endl;
-	a->print();
-
+	a->print();*/
+	
+	Elem  a(1, 3, 2);
+	Elem* b = new Elem(1, 1, 1);
+	a.right = b;
+	a.transpose();
+	a.print();
+	a.down->print();
 	
 
 	/*LList<Header> z;

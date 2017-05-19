@@ -44,4 +44,8 @@ public:
 		head = head->add(c, e);
 		//head->print();
 	}
+	void transpose()
+	{
+
+	}
 };

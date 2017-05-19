@@ -91,6 +91,19 @@ public:
 
 		}
 	}
+
+	void transpose()
+	{
+		int temp = i; 
+		i = j;
+		j = temp;
+		Elem* temp2 = up;
+		up = left;
+		left = temp2;
+		temp2 = down;
+		down = right;
+		right = temp2;
+	}
 	void print()
 	{
 		std::cout << dat << " at (" << i << ", " << j << ")" << std::endl;
