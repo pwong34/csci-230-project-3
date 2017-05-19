@@ -16,7 +16,7 @@ int main()
 	d->print();
 	d->add(c);
 	d->print();*/
-	
+
 	matrix* a = new matrix();
 	a->insert(2, 2, 5);
 	a->insert(10, 2, 3);
@@ -26,17 +26,24 @@ int main()
 	a->insert(9, 9, 9);
 	a->insert(9, 8, 7);
 	a->insert(10, 9, 6);
+	a->insert(7, 7, 7);
 	a->find(2, 2);
 	a->find(4, 2);
 	a->find(10, 2);
 	a->find(4, 4);
 	std::cout << "test" << std::endl;
 	a->print();
+	a->del(4, 3);
+	a->del(7, 7);
+	std::cout << "test----------------------" << std::endl;
+	a->print();
+
+	
 
 	/*LList<Header> z;
 	z.insert(f);
 	z.insert(f);
 	z.print();*/
-	
+
 
 }

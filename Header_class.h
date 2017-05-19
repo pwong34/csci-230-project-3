@@ -14,6 +14,10 @@ public:
 	Elem* header(){return head;}
 	char type() {return c;}
 	int index(){return pos;}
+	void setHead(Elem * h)
+	{
+		head = h;
+	}
 	void print()
 	{
 		Elem* temp = head;
