@@ -19,6 +19,25 @@ public:
 		inserthelp('c',column,j,e);
 		inserthelp('r', row, i, e);
 	}
+	void transpose()
+	{
+		for (int i = 0; i < row->length(); i++)
+		{
+			row->getValue().transpose();
+			row->next();
+		}
+		LList<Header>* temp = column;
+		column = row;
+		row = temp;
+	}
+	/*void iterator(LList<Header>* L, void(Header::*function) ())
+	{
+		for (int i = 0; i < L->length(); i++)
+		{
+			L->getValue().function();
+		}
+		L->next();
+	}*/
 	Elem* find(int x, int y)
 	{
 		Header* col = NULL;
@@ -142,10 +161,6 @@ public:
 			delete[] e;
 		}
 		return;
-	}
-	void transpose()
-	{
-
 	}
 
 	inline int index(LList<Header>*l)

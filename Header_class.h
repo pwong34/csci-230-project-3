@@ -41,6 +41,20 @@ public:
 	}
 	void transpose()
 	{
-
+		Elem* temp = head;
+		while (temp != NULL)
+		{
+			temp->transpose();
+			if (c == 'c')
+			{
+				temp = temp->right;
+			}
+			else
+			{
+				temp = temp->down;
+			}
+		}
+		if (c == 'c') { c = 'r'; }
+		else { c = 'c'; }
 	}
 };
