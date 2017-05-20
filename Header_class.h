@@ -5,10 +5,11 @@ class Header
 private:
 	char c;
 	int pos;
+	int len;
 	Elem* head;
 public:
-	Header() {}
-	Header(char a, int p, Elem* h) { head = h; c = a; pos = p; }
+	Header() { head = NULL; }
+	Header(char a, int p, Elem* h) { head = h; c = a; pos = p; len = 1; }
 	~Header(){}
 
 	Elem* header(){return head;}
@@ -38,7 +39,33 @@ public:
 	void add(Elem* e)
 	{
 		head = head->add(c, e);
+		len++;
 	}
+	int length() { return len; }
+
+	int mul(Header* h)
+	{
+		if (h->type() == 'r') { return 0; }
+		int sum = 0;
+		Elem* temp = header();
+		Elem* temp2 = h->header();
+		for (int i = 0; i < h->length(); i++)
+		{
+			temp = header();
+			for (int j = 0; j < length(); j++)
+			{
+				if (temp2->row() == temp->column())
+				{
+					sum += temp2->data()*temp->data();
+					break;
+				}
+				temp = temp->right;
+			}
+			temp2 = temp2->down;
+		}
+		return sum;
+	}
+
 	void transpose()
 	{
 		Elem* temp = head;

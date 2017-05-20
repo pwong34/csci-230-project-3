@@ -4,7 +4,7 @@ class Elem
 private:
 	int i;
 	int j;
-	int dat;
+	int val;
 	
 public:
 	Elem* up;
@@ -16,16 +16,20 @@ public:
 	{
 		i = a;
 		j = b;
-		dat = c;
+		val = c;
 		up = NULL;
 		down = NULL;
 		right = NULL;
 		left = NULL;
 	}
 	~Elem(){}
-	int data(){return dat;}
+	int data(){return val;}
 	int row(){return i;}
 	int column(){return j;}
+	void setData(int n)
+	{
+		val = n;
+	}
 
 	Elem* add(char c, Elem* elem) 
 	{
@@ -35,6 +39,7 @@ public:
 		{
 			while(true)
 			{
+				
 				if (temp == NULL || elem->row() < temp->row())
 				{
 					elem->down = temp;
@@ -106,6 +111,6 @@ public:
 	}
 	void print()
 	{
-		std::cout << dat << " at (" << i << ", " << j << ")" << std::endl;
+		std::cout << val << " at (" << i << ", " << j << ")" << std::endl;
 	}
 };

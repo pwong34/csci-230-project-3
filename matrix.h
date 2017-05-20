@@ -16,8 +16,11 @@ public:
 	void insert(int i, int j, int val)
 	{
 		Elem* e = new Elem(i, j, val);
-		inserthelp('c',column,j,e);
-		inserthelp('r', row, i, e);
+		if (this->find(i, j)==NULL)
+		{
+			inserthelp('c', column, j, e);
+			inserthelp('r', row, i, e);
+		}
 	}
 	void transpose()
 	{
@@ -29,6 +32,74 @@ public:
 		LList<Header>* temp = column;
 		column = row;
 		row = temp;
+	}
+
+	void add(matrix* m)
+	{
+		LList<Header>* row = m->r();
+		Elem* temp;
+		for (int i = 0; i < row->length(); i++)
+		{
+			temp = row->getValue().header();
+			while (temp != NULL)
+			{
+				Elem* ptr = find(temp->row(), temp->column());
+				if (ptr == NULL)
+				{
+					insert(temp->column(), temp->row(), temp->data());
+				}
+				else
+				{
+					ptr->setData(ptr->data() + temp->data());
+				}
+				temp = temp->right;
+			}
+			row->next();
+		}
+	}
+
+	matrix* mul(matrix* m)
+	{
+		LList<Header>* col = m->c();
+		matrix* product = new matrix();
+		int sum = 0;
+		Header* c = &col->getValue();
+		Header r = row->getValue();
+		for (int i = 0; i < row->length(); i++)
+		{
+			r = row->getValue();
+			col->moveToStart();
+			for (int j = 0; j < col->length(); j++)
+			{
+				c = &col->getValue();
+				product->insert(r.index(), c->index(), r.mul(c));
+				col->next();
+			}
+			row->next();
+			
+		}
+		return product;
+	}
+
+	/*void addhelp(LList<Header>* list, LList<Header>* list2, char c)
+	{
+		for (int i = 0; i < list->length(); i++)
+		{
+			Elem* temp = list->getValue().header();
+			while (temp != NULL)
+			{
+				inserthelp(list->getValue().type(), list2, list->getValue().index(), temp);
+				if(c = 'c')
+				{
+					temp = temp->down;
+				}
+				else
+				{
+					temp = temp->right;
+				}
+			}
+			list->next();
+		}
 	}
 	/*void iterator(LList<Header>* L, void(Header::*function) ())
 	{
@@ -58,18 +129,20 @@ public:
 		{
 			if (node->row() == x)
 			{
-				node->print();
+				row->moveToStart();
 				return node;
 			}
 			node = node->down;
+			if (node == NULL) { return NULL; }
 		}
+		row->moveToStart();
 		return NULL;
 	}
 	LList<Header>* c() { return column; }
 	LList<Header>* r() { return row; }
 	void inserthelp(char c,  LList<Header>* headers, int elemIndex, Elem* n)
 	{
-
+		headers->moveToStart();
 		for (int i = 0; i <= headers->length(); i++)
 		{
 			if (headers->length() == 0 || i == headers->length() || index(headers) > elemIndex)

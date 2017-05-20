@@ -6,20 +6,26 @@
 int main()
 {
 	/*Elem* a = new Elem(0, 3, 3);
-	Elem *b = new Elem(1, 3, 5);
-	Elem *c = new Elem(5, 3, 0);
-	Elem *e = new Elem(2, 3, 2);
+	Elem *b = new Elem(3, 0, 5);
+	Elem *c = new Elem(5, 0, 10);
+	Elem *e = new Elem(0, 5, 2);
 	Header* d = new Header('c', 3, a);
-	d->add(e);
-	d->print();
-	d->add(b);
-	d->print();
+	Header* f = new Header('r', 3, b);
 	d->add(c);
-	d->print();
-	d->transpose();
-	d->print();*/
+	f->add(e);
+	std::cout << f->mul(d);*/
 
 	matrix* a = new matrix();
+	matrix* b = new matrix();
+	b->insert(0, 0, 1);
+	b->insert(0, 1, 2);
+	b->insert(1, 0, 3);
+	b->insert(1, 1, 4);
+	a->insert(0, 0, 1);
+	a->insert(0, 1, 2);
+	a->insert(1, 0, 3);
+	a->insert(1, 1, 4);
+	/*b->insert(25, 25, 5);
 	a->insert(2, 2, 4);
 	a->insert(10, 2, 12);
 	a->insert(4, 2, 6);
@@ -29,12 +35,15 @@ int main()
 	a->insert(9, 8, 17);
 	a->insert(10, 9, 19);
 	a->insert(7, 7, 14);
-	std::cout << "test" << std::endl;
+	a->insert(7, 7, 10);*/
+	/*std::cout << "test" << std::endl;
+	b->print();
 	a->print();
 	std::cout << "test----------------------" << std::endl;
-	a->transpose();
-	a->print();
-	
+	a->print();*/
+	matrix* m = a->mul(b);
+	std::cout << "test----------------------" << std::endl;
+	m->print();
 	/*Elem  a(1, 3, 2);
 	Elem* b = new Elem(1, 1, 1);
 	a.right = b;
