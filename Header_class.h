@@ -11,9 +11,7 @@ private:
 public:
 	Header() { head = NULL; }
 	Header(char a, int p, Elem* h) { head = h; c = a; pos = p; len = 1; }
-	~Header(){
-		delete[] head;
-	}
+	~Header() {}
 	Elem* header(){return head;}
 	inline char type() {return c;}
 	inline int index(){return pos;}

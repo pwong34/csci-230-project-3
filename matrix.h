@@ -12,14 +12,14 @@ public:
 		row = new LList<Header>();
 	}
 	~matrix() {
-		delete[] column;
-		delete[] row;
+		delete column;
+		delete row;
 	}
 
 	void insert(int i, int j, int val) {
 		if (val == 0) { return; }
 		Elem* e = new Elem(i, j, val);
-		if (this->find(i, j)==NULL) {
+		if (find(i, j) == NULL) {
 			inserthelp('c', column, j, e);
 			inserthelp('r', row, i, e);
 		}

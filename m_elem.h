@@ -12,6 +12,12 @@ public:
 	Elem* right;
 	Elem* left;
 
+	Elem() {
+		up = NULL;
+		down = NULL;
+		right = NULL;
+		left = NULL;
+	}
 	Elem(int i, int j, int val) {
 		iCoord = i;
 		jCoord = j;
@@ -23,10 +29,7 @@ public:
 	}
 
 	~Elem() {
-		delete[] up;
-		delete[] down;
-		delete[] left;
-		delete[] right;
+		
 	}
 
 	int data(){return value;}

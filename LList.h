@@ -41,7 +41,6 @@ public:
   ~LList() { removeall(); }                   // Destructor
   void print()
   {
-	  
 	  moveToStart();
 	 for(int i = 0; i < cnt; i++)
 	  {
@@ -53,6 +52,20 @@ public:
 	  
   }
   void clear() { removeall(); init(); }       // Clear list
+
+  void reverse()
+  {
+	  Link<E>* prev = NULL;
+	  Link<E>* nxt = curr->next->next;
+	  while (curr != tail)
+	  {
+		  curr = nxt;
+		  nxt = nxt->next;
+		  curr->next = prev;
+		  prev = curr;
+	  }
+	  head = curr;
+  }
 
   // Insert "it" at current position
   void insert(const E& it) {

@@ -43,8 +43,15 @@ int main()
 	std::cout << "test----------------------" << std::endl;
 	a->print();*/
 	matrix* m = a->mul(b);
+	delete m;
 	std::cout << "test----------------------" << std::endl;
-	m->print();
+	LList<int>* k = new LList<int>();
+	k->insert(10);
+	k->insert(200);
+	std::cout << k->getValue();
+	k->reverse();
+	std::cout << k->getValue();
+	//m->print();
 	/*Elem  a(1, 3, 2);
 	Elem* b = new Elem(1, 1, 1);
 	a.right = b;
