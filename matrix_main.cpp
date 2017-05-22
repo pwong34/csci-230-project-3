@@ -25,6 +25,7 @@ int main()
 	a->insert(0, 1, 2);
 	a->insert(1, 0, 3);
 	a->insert(1, 1, 4);
+	a->insert(2, 2, 65);
 	/*b->insert(25, 25, 5);
 	a->insert(2, 2, 4);
 	a->insert(10, 2, 12);
@@ -56,6 +57,4 @@ int main()
 	z.insert(f);
 	z.insert(f);
 	z.print();*/
-
-
 }

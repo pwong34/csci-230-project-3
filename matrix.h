@@ -2,30 +2,31 @@
 #include "LList.h"
 #include <iostream>
 
-class matrix
-{
+class matrix {
 private:
 	LList<Header>* column;
 	LList<Header>* row;
 public:
-	matrix()
-	{
+	matrix() {
 		column = new LList<Header>();
 		row = new LList<Header>();
 	}
-	void insert(int i, int j, int val)
-	{
+	~matrix() {
+		delete[] column;
+		delete[] row;
+	}
+
+	void insert(int i, int j, int val) {
+		if (val == 0) { return; }
 		Elem* e = new Elem(i, j, val);
-		if (this->find(i, j)==NULL)
-		{
+		if (this->find(i, j)==NULL) {
 			inserthelp('c', column, j, e);
 			inserthelp('r', row, i, e);
 		}
 	}
-	void transpose()
-	{
-		for (int i = 0; i < row->length(); i++)
-		{
+
+	void transpose() {
+		for (int i = 0; i < row->length(); i++) {
 			row->getValue().transpose();
 			row->next();
 		}
@@ -34,22 +35,17 @@ public:
 		row = temp;
 	}
 
-	void add(matrix* m)
-	{
+	void add(matrix* m) {
 		LList<Header>* row = m->r();
 		Elem* temp;
-		for (int i = 0; i < row->length(); i++)
-		{
+		for (int i = 0; i < row->length(); i++) {
 			temp = row->getValue().header();
-			while (temp != NULL)
-			{
+			while (temp != NULL) {
 				Elem* ptr = find(temp->row(), temp->column());
-				if (ptr == NULL)
-				{
+				if (ptr == NULL) {
 					insert(temp->column(), temp->row(), temp->data());
 				}
-				else
-				{
+				else {
 					ptr->setData(ptr->data() + temp->data());
 				}
 				temp = temp->right;
@@ -58,65 +54,30 @@ public:
 		}
 	}
 
-	matrix* mul(matrix* m)
-	{
+	matrix* mul(matrix* m) {
 		LList<Header>* col = m->c();
 		matrix* product = new matrix();
 		int sum = 0;
 		Header* c = &col->getValue();
 		Header r = row->getValue();
-		for (int i = 0; i < row->length(); i++)
-		{
+		for (int i = 0; i < row->length(); i++) {
 			r = row->getValue();
 			col->moveToStart();
-			for (int j = 0; j < col->length(); j++)
-			{
+			for (int j = 0; j < col->length(); j++) {
 				c = &col->getValue();
 				product->insert(r.index(), c->index(), r.mul(c));
 				col->next();
 			}
-			row->next();
-			
+			row->next();	
 		}
 		return product;
 	}
 
-	/*void addhelp(LList<Header>* list, LList<Header>* list2, char c)
-	{
-		for (int i = 0; i < list->length(); i++)
-		{
-			Elem* temp = list->getValue().header();
-			while (temp != NULL)
-			{
-				inserthelp(list->getValue().type(), list2, list->getValue().index(), temp);
-				if(c = 'c')
-				{
-					temp = temp->down;
-				}
-				else
-				{
-					temp = temp->right;
-				}
-			}
-			list->next();
-		}
-	}
-	/*void iterator(LList<Header>* L, void(Header::*function) ())
-	{
-		for (int i = 0; i < L->length(); i++)
-		{
-			L->getValue().function();
-		}
-		L->next();
-	}*/
-	Elem* find(int x, int y)
-	{
+	Elem* find(int x, int y) {
 		Header* col = NULL;
 		column->moveToStart();
-		for (int i = 0; i < column->length(); i++)
-		{
-			if (index(column) == y)
-			{
+		for (int i = 0; i < column->length(); i++) {
+			if (index(column) == y) {
 				col = &column->getValue();
 				break;
 			}
@@ -125,10 +86,8 @@ public:
 		column->moveToStart();
 		if (col == NULL) { return NULL; }
 		Elem* node = col->header();
-		for (int j = 0; j < row->length(); j++)
-		{
-			if (node->row() == x)
-			{
+		for (int j = 0; j < row->length(); j++) {
+			if (node->row() == x) {
 				row->moveToStart();
 				return node;
 			}
@@ -138,22 +97,21 @@ public:
 		row->moveToStart();
 		return NULL;
 	}
-	LList<Header>* c() { return column; }
-	LList<Header>* r() { return row; }
-	void inserthelp(char c,  LList<Header>* headers, int elemIndex, Elem* n)
-	{
+
+	 inline LList<Header>* c() { return column; }
+
+	 inline LList<Header>* r() { return row; }
+
+	void inserthelp(char c,  LList<Header>* headers, int elemIndex, Elem* n) {
 		headers->moveToStart();
-		for (int i = 0; i <= headers->length(); i++)
-		{
-			if (headers->length() == 0 || i == headers->length() || index(headers) > elemIndex)
-			{
+		for (int i = 0; i <= headers->length(); i++) {
+			if (headers->length() == 0 || i == headers->length() || index(headers) > elemIndex) {
 				Header head(c, elemIndex, n);
 				headers->insert(head);
 				headers->moveToStart();
 				break;
 			}
-			else if (index(headers) == elemIndex)
-			{
+			else if (index(headers) == elemIndex) {
 				headers->getValue().add(n);
 				headers->moveToStart();
 				break;
@@ -164,85 +122,69 @@ public:
 		return;
 	}
 
-	void del(int i, int j)
-	{
+	void del(int i, int j) {
 		Elem* e = find(i, j);
 		if (e == NULL) { return; }
 		Header* header = NULL;
 		bool cRemove = false, rRemove = false;
 		column->moveToStart();
-		for (int a = 0; a < column->length(); a++)
-		{
-			if (index(column) == j)
-			{
+		for (int a = 0; a < column->length(); a++) {
+			if (index(column) == j) {
 				header = &column->getValue();
 				break;
 			}
 			column->next();
 		}
-		if (e->up == NULL && e->down == NULL)
-		{
+		if (e->up == NULL && e->down == NULL) {
 			cRemove = true;
 		}
-		else if (e->up == NULL)
-		{
+		else if (e->up == NULL) {
 			e->down->up = NULL;
 			header->setHead(e->down);
 		}
-		else if (e->down == NULL)
-		{
+		else if (e->down == NULL) {
 			e->up->down = NULL;
 		}
-		else
-		{
+		else {
 			e->up->down = e->down;
 			e->down->up = e->up;
 		}
 		//Delete for Rows
 		row->moveToStart();
-		for (int a = 0; a < row->length(); a++)
-		{
-			if (index(row) == i)
-			{
+		for (int a = 0; a < row->length(); a++) {
+			if (index(row) == i) {
 				header = &row->getValue();
 				break;
 			}
 			row->next();
 		}
-		if (e->left == NULL && e->right == NULL)
-		{
+		if (e->left == NULL && e->right == NULL) {
 			rRemove = true;
 		}
-		else if (e->left == NULL)
-		{
+		else if (e->left == NULL) {
 			e->right->left = NULL;
 			header->setHead(e->right);
 		}
-		else if (e->right == NULL)
-		{
+		else if (e->right == NULL) {
 			e->left->right = NULL;
 		}
-		else
-		{
+		else {
 			e->left->right = e->right;
 			e->right->left = e->left;
 		}
 		if (cRemove) { column->remove(); }
 		if (rRemove) { row->remove(); }
-		if (!cRemove && !rRemove)
-		{
+		if (!cRemove && !rRemove) {
 			delete[] e;
 		}
 		return;
 	}
 
-	inline int index(LList<Header>*l)
-	{
+	inline int index(LList<Header>*l) {
 		return l->getValue().index();
 	}
 
-	void print()
-	{
+	void print() {
 		column->print();
 		std::cout << std::endl;
 		row->print();

@@ -2,9 +2,9 @@
 class Elem
 {
 private:
-	int i;
-	int j;
-	int val;
+	int iCoord;
+	int jCoord;
+	int value;
 	
 public:
 	Elem* up;
@@ -12,50 +12,48 @@ public:
 	Elem* right;
 	Elem* left;
 
-	Elem(int a, int b, int c)
-	{
-		i = a;
-		j = b;
-		val = c;
+	Elem(int i, int j, int val) {
+		iCoord = i;
+		jCoord = j;
+		value = val;
 		up = NULL;
 		down = NULL;
 		right = NULL;
 		left = NULL;
 	}
-	~Elem(){}
-	int data(){return val;}
-	int row(){return i;}
-	int column(){return j;}
-	void setData(int n)
-	{
-		val = n;
+
+	~Elem() {
+		delete[] up;
+		delete[] down;
+		delete[] left;
+		delete[] right;
 	}
 
-	Elem* add(char c, Elem* elem) 
-	{
+	int data(){return value;}
+	int row(){return iCoord;}
+	int column(){return jCoord;}
+
+	void setData(int n) {
+		value = n;
+	}
+
+	Elem* add(char c, Elem* elem) {
 		Elem* temp = this;
 		Elem* temp2 = this;
-		if(c=='c')
-		{
-			while(true)
-			{
-				
-				if (temp == NULL || elem->row() < temp->row())
-				{
+		if(c=='c') {
+			while(true) {
+				if (temp == NULL || elem->row() < temp->row()) {
 					elem->down = temp;
-					if (elem->row() < this->row())
-					{
+					if (elem->row() < this->row()) {
 						temp->up = elem;
 						return elem;
 					}
-					if (temp != NULL)
-					{
+					if (temp != NULL) {
 						elem->up = temp->up;
 						temp2->down = elem;
 						temp->up = elem;
 					}
-					else 
-					{
+					else {
 						elem->up = temp2;
 						temp2->down = elem;
 					}
@@ -65,26 +63,20 @@ public:
 				temp = temp->down;
 			}
 		}
-		else
-		{
-			while (true)
-			{
-				if (temp == NULL || elem->column() < temp->column())
-				{
+		else {
+			while (true) {
+				if (temp == NULL || elem->column() < temp->column()) {
 					elem->right = temp;
-					if (elem->column() < this->column())
-					{
+					if (elem->column() < this->column()) {
 						temp->left = elem;
 						return elem;
 					}
-					if (temp != NULL)
-					{
+					if (temp != NULL) {
 						elem->left = temp->left;
 						temp2->right = elem;
 						temp->left = elem;
 					}
-					else
-					{
+					else {
 						elem->left = temp2;
 						temp2->right = elem;
 					}
@@ -93,15 +85,13 @@ public:
 				temp2 = temp;
 				temp = temp->right;
 			}
-
 		}
 	}
 
-	void transpose()
-	{
-		int temp = i; 
-		i = j;
-		j = temp;
+	void transpose() {
+		int temp = iCoord; 
+		iCoord = jCoord;
+		jCoord = temp;
 		Elem* temp2 = up;
 		up = left;
 		left = temp2;
@@ -109,8 +99,8 @@ public:
 		down = right;
 		right = temp2;
 	}
-	void print()
-	{
-		std::cout << val << " at (" << i << ", " << j << ")" << std::endl;
+
+	void print() {
+		std::cout << value << " at (" << iCoord << ", " << jCoord << ")" << std::endl;
 	}
 };

@@ -48,4 +48,3 @@ public:
     virtual void moveToPos(int pos) = 0;
 
 };
-
