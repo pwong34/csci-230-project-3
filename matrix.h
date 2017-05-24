@@ -175,7 +175,7 @@ public:
 		if (cRemove) { column->remove(); }
 		if (rRemove) { row->remove(); }
 		if (!cRemove && !rRemove) {
-			delete[] e;
+			delete e;
 		}
 		return;
 	}
@@ -185,8 +185,9 @@ public:
 	}
 
 	void print() {
+		std::cout << "Columns--------------" << std::endl;
 		column->print();
-		std::cout << std::endl;
+		std::cout << "Rows-----------------" << std::endl;
 		row->print();
 	}
 };

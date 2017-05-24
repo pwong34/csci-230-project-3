@@ -1,5 +1,3 @@
-
-
 template <typename E> class List { // List ADT
 private:
     void operator =(const List&) {}      // Protect assignment

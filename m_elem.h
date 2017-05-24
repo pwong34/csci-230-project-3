@@ -95,12 +95,12 @@ public:
 		int temp = iCoord; 
 		iCoord = jCoord;
 		jCoord = temp;
-		Elem* temp2 = up;
-		up = left;
-		left = temp2;
-		temp2 = down;
-		down = right;
-		right = temp2;
+		Elem* temp2 = right;
+		right = down;
+		down = temp2;
+		temp2 = left;
+		left = up;
+		up = temp2;
 	}
 
 	void print() {
